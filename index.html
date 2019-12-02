@@ -8,7 +8,9 @@
 
     // Wait for PhoneGap to load
     //
-    document.addEventListener("deviceready", onDeviceReady, false);
+    function onBodyLoad() {
+                document.addEventListener("deviceready", onDeviceReady, false);
+            }
 
     // PhoneGap is ready
     //
@@ -108,7 +110,7 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
 
     </script>
   </head>
-  <body>
+  <body onload="onBodyLoad()">
     <h1>Example</h1>
     <button id = "createFile">CREATE FILE</button>
 <button id = "writeFile">WRITE FILE</button>
