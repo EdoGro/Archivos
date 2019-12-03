@@ -29,7 +29,7 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
 
    function successCallback(fs) {
       fs.root.getFile('practica.txt', {create: true, exclusive: true}, function(fileEntry) {
-         alert('File creation successfull! ' + fs.fullPath +'jgj')
+         alert('File creation successfull! ' + fs.file.fullPath +'jgj')
       }, errorCallback);
    }
 
