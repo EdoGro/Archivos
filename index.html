@@ -49,7 +49,7 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
 
          fileEntry.createWriter(function(fileWriter) {
             fileWriter.onwriteend = function(e) {
-               alert('Write completed. '+ fileEntry.modificationTime);
+               alert('Write completed. '+ fileEntry.metadata.modificationTime);
             };
 
             fileWriter.onerror = function(e) {
