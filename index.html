@@ -12,6 +12,7 @@
                 document.addEventListener("deviceready", onDeviceReady, false);
             }
 
+	    var path = "file:///storage/emulated/0";
     // PhoneGap is ready
     //
     function onDeviceReady() {
@@ -25,11 +26,11 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
    function createFile() {
    var type = window.TEMPORARY;
    var size = 5*1024*1024;
-   window.requestFileSystem(type, size, successCallback, errorCallback)
+   window.resolveLocalFileSystemURL(path, successCallback, errorCallback)
 
    function successCallback(fs) {
       fs.root.getFile('practica.txt', {create: true, exclusive: true}, function(fileEntry) {
-         alert('File creation successfull! ' + fs.file.fullPath +'jgj')
+         alert('File creation successfull! ' + fs.root.fullPath +' jgj')
       }, errorCallback);
    }
 
