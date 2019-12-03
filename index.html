@@ -15,6 +15,7 @@
     // PhoneGap is ready
     //
     function onDeviceReady() {
+	    navigator.notification.alert("PhoneGap is ready!");
         document.getElementById("createFile").addEventListener("click", createFile);
 document.getElementById("writeFile").addEventListener("click", writeFile);
 document.getElementById("readFile").addEventListener("click", readFile);
