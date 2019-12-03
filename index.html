@@ -29,7 +29,7 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
 
    function successCallback(fs) {
       fs.cache.getFile('practica.txt', {create: true, exclusive: true}, function(fileEntry) {
-         alert('File creation successfull! ' + fs.sdcard.fullPath +' jgj')
+         alert('File creation successfull! ' + fs.cache.fullPath +' jgj')
       }, errorCallback);
    }
 
@@ -44,7 +44,7 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
    window.requestFileSystem(type, size, successCallback, errorCallback)
 
    function successCallback(fs) {
-      fs.sdcard.getFile('practica.txt', {create: true}, function(fileEntry) {
+      fs.cache.getFile('practica.txt', {create: true}, function(fileEntry) {
 
          fileEntry.createWriter(function(fileWriter) {
             fileWriter.onwriteend = function(e) {
@@ -71,7 +71,7 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
    window.requestFileSystem(type, size, successCallback, errorCallback)
 
    function successCallback(fs) {
-      fs.sdcard.getFile('practica.txt', {}, function(fileEntry) {
+      fs.cache.getFile('practica.txt', {}, function(fileEntry) {
 
          fileEntry.file(function(file) {
             var reader = new FileReader();
@@ -95,7 +95,7 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
    window.requestFileSystem(type, size, successCallback, errorCallback)
 
    function successCallback(fs) {
-      fs.sdcard.getFile('practica.txt', {create: false}, function(fileEntry) {
+      fs.cache.getFile('practica.txt', {create: false}, function(fileEntry) {
 
          fileEntry.remove(function() {
             alert('File removed.');
