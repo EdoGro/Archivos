@@ -20,6 +20,7 @@
 document.getElementById("writeFile").addEventListener("click", writeFile);
 document.getElementById("readFile").addEventListener("click", readFile);
 document.getElementById("removeFile").addEventListener("click", removeFile);
+	    document.getElementById("meta").addEventListener("click", readMeta);
     }
 
    function createFile() {
@@ -107,7 +108,14 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
       alert("ERROR: " + error.code)
    }
 }
-      
+	    function readMeta(){
+      function win(metadata) {
+    alert("Last Modified: " + metadata.modificationTime);
+}
+
+// Request the metadata object for this entry
+entry.getMetadata(win, null);
+	    }
 
     </script>
   </head>
@@ -117,6 +125,7 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
 <button id = "writeFile">WRITE FILE</button>
 <button id = "readFile">READ FILE</button>
 <button id = "removeFile">DELETE FILE</button>
+	  <button id = "meta">METADATA FILE</button>
 <textarea id = "textarea"></textarea>
   </body>
 </html>
