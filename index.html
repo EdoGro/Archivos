@@ -109,12 +109,11 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
    }
 }
 	    function readMeta(){
-      function win(metadata) {
-    alert("Last Modified: " + metadata.modificationTime);
-}
-
-// Request the metadata object for this entry
-entry.getMetadata(win, null);
+      workingDirectory.getFile("practica.txt", {}, function(fileEntry) {
+  workingDirectory.getDirectory("copiapractica", {}, function(dirEntry) {
+    fileEntry.copyTo(dirEntry);
+  }, handleError);
+}, handleError);
 	    }
 
     </script>
