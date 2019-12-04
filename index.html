@@ -21,7 +21,7 @@ document.getElementById("writeFile").addEventListener("click", writeFile);
 document.getElementById("readFile").addEventListener("click", readFile);
 document.getElementById("removeFile").addEventListener("click", removeFile);
 	    window.requestFileSystem(LocalFileSystem.TEMPORARY,
-5242880, onGetFileSystemSuccess, onFileError);
+5242880, listPath, onFileError);
     }
 
    function createFile() {
@@ -185,6 +185,38 @@ msgText = "Unknown error.";
 //Now tell the user what happened
 navigator.notification.alert(msgText, null, "File Error");
 }
+	    function listPath(myPath){
+  window.resolveLocalFileSystemURL(myPath, function (dirEntry) {
+       var directoryReader = dirEntry.createReader();
+       directoryReader.readEntries(onSuccessCallback,onFailCallback);
+  });
+
+  function onSuccessCallback(entries){
+       for (i=0; i<entries.length; i++) {
+           var row = entries[i];
+           var html = '';         
+           if(row.isDirectory){
+                 // We will draw the content of the clicked folder
+                 html = '<li onclick="listPath('+"'"+row.nativeURL+"'"+');">'+row.name+'</li>';
+           }else{
+                 // alert the path of file
+                 html = '<li onclick="getFilepath('+"'"+row.nativeURL+"'"+');">'+row.name+'</li>';
+           }
+       
+       }
+                
+        document.getElementById("select-demo").innerHTML = html;
+  }
+
+  function onFailCallback(e){
+    console.error(e);
+    // In case of error
+  }
+}
+
+function getFilepath(thefilepath){
+        alert(thefilepath);
+}
     </script>
   </head>
   <body onload="onBodyLoad()">
@@ -194,18 +226,10 @@ navigator.notification.alert(msgText, null, "File Error");
 <button id = "readFile">READ FILE</button>
 <button id = "removeFile">DELETE FILE</button>
 <textarea id = "textarea"></textarea>
-	  <section id="dirList" data-role="page" data-add-back-btn="true">
-<header data-role="header">
-<h1>File API Demo</h1>
-<a onclick="writeFile();" data-icon="plus"
-class="ui-btn-right">Write</a>
-</header>
-<div data-role="content">
-<p>File system contents:</p>
-<div id="dirEntries"></div>
-<hr />
-<div id="writeInfo"></div>
+	  <div>
+  <ul id="select-demo">
+    
+  </ul>
 </div>
-</section>
   </body>
 </html>
