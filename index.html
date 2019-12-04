@@ -20,7 +20,8 @@
 document.getElementById("writeFile").addEventListener("click", writeFile);
 document.getElementById("readFile").addEventListener("click", readFile);
 document.getElementById("removeFile").addEventListener("click", removeFile);
-	    document.getElementById("meta").addEventListener("click", readMeta);
+	    window.requestFileSystem(fileSystemConstant, sandboxSize,
+onGetFileSystemSuccess, onErrorFunction);
     }
 
    function createFile() {
@@ -152,7 +153,6 @@ onGetFileSystemSuccess, onErrorFunction);
 <button id = "writeFile">WRITE FILE</button>
 <button id = "readFile">READ FILE</button>
 <button id = "removeFile">DELETE FILE</button>
-	  <button id = "meta">METADATA FILE</button>
 <textarea id = "textarea"></textarea>
 	  <section id="dirList" data-role="page" data-add-back-btn="true">
 <header data-role="header">
