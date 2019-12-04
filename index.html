@@ -20,8 +20,6 @@
 document.getElementById("writeFile").addEventListener("click", writeFile);
 document.getElementById("readFile").addEventListener("click", readFile);
 document.getElementById("removeFile").addEventListener("click", removeFile);
-	    window.requestFileSystem(LocalFileSystem.TEMPORARY,
-5242880, listPath, onFileError);
     }
 
    function createFile() {
@@ -50,7 +48,7 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
 
          fileEntry.createWriter(function(fileWriter) {
             fileWriter.onwriteend = function(e) {
-               alert('Write completed. '+ fileEntry.metadata.modificationTime);
+               alert('Write completed.');
             };
 
             fileWriter.onerror = function(e) {
@@ -109,114 +107,8 @@ document.getElementById("removeFile").addEventListener("click", removeFile);
       alert("ERROR: " + error.code)
    }
 }
-	    function onGetFileSystemSuccess(fs) {
-alert("Accessing " + fs.name + " storage (" +
-fs.root.fullPath + ")");
-//Create a directory reader we'll use to list the files in
-//the directory
-var dr = fs.root.createReader();
-// Get a list of all the entries in the directory
-dr.readEntries(onDirReaderSuccess, onFileError);
-}
-	    function onDirReaderSuccess(dirEntries) {
-var i, fl, len;
-len = dirEntries.length;
-if(len > 0) {
-fl = '<ul data-role="listview">';
-for( i = 0; i < len; i++) {
-if(dirEntries[i].isDirectory == true) {
-fl += '<li><a href="#" onclick="processEntry(' + i +
-');">Directory: ' + dirEntries[i].name + '</a></li>';
-} else {
-fl += '<li><a href="#" onclick="processEntry(' + i +
-');">File: ' + dirEntries[i].name + '</a></li>';
-}
-}fl += "</ul>";
-} else {
-fl = "<p>No entries found</p>";
-}
-//Update the page content with our directory list
-$('#dirEntries').html(fl);
-//Display the directory entries page
-$.mobile.changePage("#dirList", "slide", false, true);
-}
-	    function onFileError(e) {
-var msgText;
-switch(e.code) {
-case FileError.NOT_FOUND_ERR:
-msgText = "File not found error.";
-break;
-case FileError.SECURITY_ERR:
-msgText = "Security error.";
-break;
-case FileError.ABORT_ERR:
-msgText = "Abort error.";
-break;
-case FileError.NOT_READABLE_ERR:
-msgText = "Not readable error.";
-break;
-case FileError.ENCODING_ERR:
-msgText = "Encoding error.";
-break;
-case FileError.NO_MODIFICATION_ALLOWED_ERR:
-msgText = "No modification allowed.";
-break;
-case FileError.INVALID_STATE_ERR:
-msgText = "Invalid state.";
-break;
-case FileError.SYNTAX_ERR:
-msgText = "Syntax error.";
-break;
-case FileError.INVALID_MODIFICATION_ERR:
-msgText = "Invalid modification.";
-break;
-case FileError.QUOTA_EXCEEDED_ERR:
-msgText = "Quota exceeded.";
-break;
-case FileError.TYPE_MISMATCH_ERR:
-msgText = "Type mismatch.";
-break;
-case FileError.PATH_EXISTS_ERR:
-msgText = "Path exists error.";
-break;
-default:
-msgText = "Unknown error.";
-}
-//Now tell the user what happened
-navigator.notification.alert(msgText, null, "File Error");
-}
-	    function listPath(myPath){
-  window.resolveLocalFileSystemURL(myPath, function (dirEntry) {
-       var directoryReader = dirEntry.createReader();
-       directoryReader.readEntries(onSuccessCallback,onFailCallback);
-  });
+      
 
-  function onSuccessCallback(entries){
-       for (i=0; i<entries.length; i++) {
-           var row = entries[i];
-           var html = '';         
-           if(row.isDirectory){
-                 // We will draw the content of the clicked folder
-                 html = '<li onclick="listPath('+"'"+row.nativeURL+"'"+');">'+row.name+'</li>';
-           }else{
-                 // alert the path of file
-                 html = '<li onclick="getFilepath('+"'"+row.nativeURL+"'"+');">'+row.name+'</li>';
-           }
-       
-       }
-                
-        document.getElementById("select-demo").innerHTML = html;
-  }
-
-  function onFailCallback(e){
-    console.error(e);
-    // In case of error
-  }
-}
-
-function getFilepath(thefilepath){
-        alert(thefilepath);
-}
     </script>
   </head>
   <body onload="onBodyLoad()">
@@ -226,10 +118,5 @@ function getFilepath(thefilepath){
 <button id = "readFile">READ FILE</button>
 <button id = "removeFile">DELETE FILE</button>
 <textarea id = "textarea"></textarea>
-	  <div>
-  <ul id="select-demo">
-    
-  </ul>
-</div>
   </body>
 </html>
