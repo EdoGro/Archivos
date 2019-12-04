@@ -3,9 +3,9 @@
   <preference name="phonegap-version" value="cli-8.1.1" />
   <preference name="AndroidPersistentFileLocation" value="Compatibility" />
 <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root" />
-  <name>API Contact</name>
+  <name>API File</name>
   <description>
-      Esta es una App de PhoneGapp Contactos
+      Esta es una App de PhoneGapp Archivos
   </description>
   <author href="http://cordova.io">
       Guerrero Sandoval Edith Citlali
